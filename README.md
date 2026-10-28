@@ -42,6 +42,18 @@ The application connects to a backend API. Create a `.env.local` file in the roo
 ```env
 VITE_API_BASE_URL=http://localhost:8000/api
 ```
+
+Google Analytics 4 is enabled only in production when a valid measurement ID is
+provided:
+
+```env
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+For the production deployment, add `VITE_GA_MEASUREMENT_ID` as a GitHub Actions
+repository variable. The deploy workflow exposes it to Vite at build time. Page
+views are tracked on initial load and whenever the React Router location changes.
+
 ### Running the Development Server
 Once dependencies are installed and configuration is set, you can start the local development server.
 ```sh
@@ -71,4 +83,3 @@ The `ecommerce-frontend` is styled using **Tailwind CSS**, a utility-first CSS f
 
 - **[spirit-beads-service](https://github.com/caseyjkey/spirit-beads-service)** - Django e-commerce backend (service layer)
 - **[lighter-splitter](https://github.com/caseyjkey/lighter-splitter)** - Spirit Beads ecosystem - image processing pipeline
-

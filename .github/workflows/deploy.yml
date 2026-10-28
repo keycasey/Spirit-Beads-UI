@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    env:
+      VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
     steps:
       - name: Build & Deploy
         run: |

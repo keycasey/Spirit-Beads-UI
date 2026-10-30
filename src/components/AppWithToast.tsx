@@ -10,6 +10,7 @@ import Index from "@/pages/Index";
 import Success from "@/pages/Success";
 import Cancel from "@/pages/Cancel";
 import NotFound from "@/pages/NotFound";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const AppContent = () => {
     <>
       <ToastContainer />
       <BrowserRouter>
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/success" element={<Success />} />

@@ -5,7 +5,7 @@ type GtagArguments = [GtagCommand, ...unknown[]];
 
 declare global {
   interface Window {
-    dataLayer: GtagArguments[];
+    dataLayer: unknown[];
     gtag: (...args: GtagArguments) => void;
   }
 }
@@ -20,9 +20,12 @@ export const initializeAnalytics = () => {
   if (!isAnalyticsEnabled || typeof window === "undefined") return;
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(...args: GtagArguments) {
-    window.dataLayer.push(args);
-  };
+  const gtag = function gtag() {
+    // Google's command queue requires the native Arguments object, not an array.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer.push(arguments);
+  } as Window["gtag"];
+  window.gtag = window.gtag || gtag;
 
   if (!document.querySelector(`script[data-ga-measurement-id="${measurementId}"]`)) {
     const script = document.createElement("script");
